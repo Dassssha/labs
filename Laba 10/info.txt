@@ -1,0 +1,61 @@
+npm run test в репозитории проекта, чтобы запустить.
+
+Все тесты имеют логичные названия на английском языке.
+Тесты проверяют добавление/удаления/изменение/получение сущностей в базе данных, 
+и работу роутов.
+
+Количество тестов: 17
+
+Users: 
+	Should insert user into collection
+		expect(insertedUser).toHaveProperty('email', mockUser.email);
+        	expect(insertedUser).toHaveProperty('password', mockUser.password);
+        	expect(insertedUser).toHaveProperty('name', mockUser.name);
+
+	Should delete user from collection
+ 		expect(candidate).toBeNull();
+
+	Should add course to cart
+		expect(user.cart.items[0].courseId).toStrictEqual(courseId);
+	
+ 	Should add course to cart several times
+        	expect(user.cart.items[1].current).toBe(amount+1); [несколько раз]
+	
+	Should clear user cart
+		 expect(user.cart.items[0]).toBeUndefined();
+
+Course: 
+	Should get list of courses
+		expect(courses).toBeDefined();
+        	expect(typeof courses).toBe('object');
+        	expect(courses).toBeTruthy();
+
+	Should create a new course
+		expect(insertedCourse).toHaveProperty('title', mockCourse.title);
+        	expect(insertedCourse).toHaveProperty('price', mockCourse.price);
+        	expect(insertedCourse).toHaveProperty('img', mockCourse.img);
+
+	Should delete an existing course
+		 expect(deletedCourse).toBeNull();
+
+200 requests:
+	Courses request statusCode should be 200
+		expect(res.statusCode).toBe(200);
+	Cart request statusCode should be 200
+		expect(res.statusCode).toBe(200);
+	Order request statusCode should be 200
+		expect(res.statusCode).toBe(200);
+	Home request statusCode should be 200
+		expect(res.statusCode).toBe(200);
+	Profile request statusCode should be 200
+		expect(res.statusCode).toBe(200);
+
+404 requests:
+	http://localhost:3000/reseet request statusCode should be 404
+		expect(res.statusCode).toBe(404);
+	http://localhost:3000/cart1 request statusCode should be 404
+		expect(res.statusCode).toBe(404);
+	http://localhost:3000/orders/1 request statusCode should be 404
+		expect(res.statusCode).toBe(404);
+	http://localhost:3000/cart/12 request statusCode should be 404
+		expect(res.statusCode).toBe(404);
